@@ -1,9 +1,12 @@
 
 import 'package:flutter/services.dart';
+import 'package:flutter_application_test/infrastructure/datasources/genre_db_datasource.dart';
 import 'package:flutter_application_test/infrastructure/datasources/local_mylist_datasource_impl.dart';
 import 'package:flutter_application_test/infrastructure/datasources/purchase_history_db_datasource.dart';
+import 'package:flutter_application_test/infrastructure/repositories/genre_repository_impl.dart';
 import 'package:flutter_application_test/infrastructure/repositories/mylist_post_repository_impl.dart';
 import 'package:flutter_application_test/infrastructure/repositories/purchase_history_repository_impl.dart';
+
 import 'package:flutter_application_test/presentation/config/app_router.dart';
 
 import 'package:flutter_application_test/presentation/providers/providers.dart';
@@ -36,6 +39,8 @@ class MyApp extends StatelessWidget {
 
     final myListPostRepository = MyListRepositoryImpl(myListDatasource: LocalMyListDatasourceImpl());
     final purchaseHistoryRepository = PurchaseHistoryRepositoryImpl(PurchaseHistoryDbDatasource());
+    final genresRepository = GenreRepositoryImpl(GenreDbDatasource());
+    //import
 
 
     SystemChrome.setSystemUIOverlayStyle(
@@ -56,7 +61,12 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             lazy: false,
             create: (context) => PurchaseHistoryProvider(purchaseHistoryRepository: purchaseHistoryRepository)..loadTicketsPurchaseHistory()
-           )
+           ),
+           //se agrego el provider de generos
+          ChangeNotifierProvider(
+            lazy: true,
+            create: (context) => GenresProvider(genresRepository: genresRepository)..loadGenreList()
+          )
         ],
         child: MaterialApp.router(
     

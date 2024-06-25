@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_test/presentation/screens/personal_screen/widgets/recomendations.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/providers.dart';
@@ -12,6 +11,10 @@ import '../../../widgets/widgets.dart';
 class BuildAttendingListView extends StatelessWidget {
   const BuildAttendingListView({super.key});
 
+
+
+  //MODIFICACIONES REALIZADAS EN ESTE WIDGET PARA MOSTRAR LOS DATOS CORRESPONDIENTES A LAS PELICULAS
+
   @override
   Widget build(BuildContext context) {
 
@@ -21,6 +24,9 @@ class BuildAttendingListView extends StatelessWidget {
       physics: const BouncingScrollPhysics(decelerationRate: ScrollDecelerationRate.fast),
       itemCount: 10,
       itemBuilder: ((context, index) {
+        if (purchaseHistory.ticketsList.isEmpty) {
+          return const SizedBox();
+        }
         final ticket = purchaseHistory.ticketsList[index];
 
         final date = "${ticket.releaseDate.year.toString().padLeft(4, '0')}-${ticket.releaseDate.month.toString().padLeft(2, '0')}-${ticket.releaseDate.day.toString().padLeft(2, '0')}";
@@ -97,14 +103,8 @@ class BuildAttendingListView extends StatelessWidget {
                               style: ThemeStylesSettings.primaryText,
                             ),
                            const SizedBox(height: 5),
-                                //if(ticket.adult == true && ticket.popularity>10000)
+                                // MODIFICACION REALIZADA PARA MOSTRAR RECOMENDACIONES AL USUARIO
                                   Recommendations(adult: ticket.adult, popularity: ticket.popularity)
-                                //else if(ticket.adult == false && ticket.popularity>1000)
-                                  //Recommendations(adult: false, popularity: true)
-                                //else if(ticket.adult && ticket.popularity<1000)
-                                  //Recommendations(adult: true, popularity: false)
-                                //else
-                                  //Recommendations(adult: false, popularity: false)
                               ],
                             )
                         ),

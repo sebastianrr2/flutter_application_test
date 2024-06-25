@@ -1,14 +1,13 @@
 
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application_test/presentation/screens/personal_screen/widgets/build_attending_list_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_application_test/presentation/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../screens.dart';
-import 'widgets/build_custom_tabbar.dart';
-import 'widgets/build_follow_column.dart';
+///import 'widgets/build_custom_tabbar.dart';
+//import 'widgets/build_follow_column.dart';
 import 'widgets/build_user_container.dart';
 
 class PersonalScreen extends StatelessWidget {
@@ -42,6 +41,9 @@ class PersonalScreen extends StatelessWidget {
           ),
         ],
       ),
+
+      //MODIFICACION PARA CAMBIAR LA VISTA DEL USUARIO Y LOS BOTONES,
+      //DE ESTA FORMA SOLO SE DESPLIEGA LA LISTVIEW CORRESPONDIENTE A LAS PELICULAS
       body: const Column(
         children: [
           BuildCustomSearchBar(),

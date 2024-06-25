@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_test/presentation/theme/app_theme.dart';
 import 'package:flutter_application_test/presentation/theme/theme.dart';
 
+
+
+//MODIFICACION DE NUEVO WIDGET PARA RECOMENDACIONES AL USUARIO
+
 class Recommendations extends StatelessWidget {
 
 
