@@ -2,10 +2,10 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_application_test/infrastructure/datasources/genre_db_datasource.dart';
 import 'package:flutter_application_test/infrastructure/datasources/local_mylist_datasource_impl.dart';
-import 'package:flutter_application_test/infrastructure/datasources/purchase_history_db_datasource.dart';
+import 'package:flutter_application_test/infrastructure/datasources/movies_db_datasource.dart';
 import 'package:flutter_application_test/infrastructure/repositories/genre_repository_impl.dart';
 import 'package:flutter_application_test/infrastructure/repositories/mylist_post_repository_impl.dart';
-import 'package:flutter_application_test/infrastructure/repositories/purchase_history_repository_impl.dart';
+import 'package:flutter_application_test/infrastructure/repositories/movie_repository_impl.dart';
 
 import 'package:flutter_application_test/presentation/config/app_router.dart';
 
@@ -21,6 +21,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main() async {
   /* Sólo tiene que llamar a este método si necesita que la vinculación se inicialice antes de llamar a 
   runApp*/
+
+
+  
   WidgetsFlutterBinding.ensureInitialized();
   // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
@@ -38,7 +41,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final myListPostRepository = MyListRepositoryImpl(myListDatasource: LocalMyListDatasourceImpl());
-    final purchaseHistoryRepository = PurchaseHistoryRepositoryImpl(PurchaseHistoryDbDatasource());
+    final purchaseHistoryRepository = MovieRepositoryImpl(MoviesDbDatasource());
     final genresRepository = GenreRepositoryImpl(GenreDbDatasource());
     //import
 
@@ -52,6 +55,9 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown
     ]);
 
+
+
+
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(
@@ -60,10 +66,12 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             lazy: false,
-            create: (context) => PurchaseHistoryProvider(purchaseHistoryRepository: purchaseHistoryRepository)..loadTicketsPurchaseHistory()
+            create: (context) => MovieProvider(purchaseHistoryRepository: purchaseHistoryRepository)..loadTicketsPurchaseHistory()
            ),
            //se agrego el provider de generos
           ChangeNotifierProvider(
+
+
             lazy: true,
             create: (context) => GenresProvider(genresRepository: genresRepository)..loadGenreList()
           )

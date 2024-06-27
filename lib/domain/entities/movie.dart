@@ -1,4 +1,4 @@
-class PurchaseHistory {
+class Movie {
   final bool adult;
   final String backdropPath;
   final List<String> genreIds;
@@ -14,7 +14,7 @@ class PurchaseHistory {
   final double voteAverage;
   final int voteCount;
 
-  PurchaseHistory({
+  Movie({
     required this.adult,
     required this.backdropPath,
     required this.genreIds,

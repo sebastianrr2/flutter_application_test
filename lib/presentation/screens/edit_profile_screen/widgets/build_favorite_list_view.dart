@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_application_test/presentation/screens/personal_screen/widgets/recomendations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/providers.dart';
-import '../../../theme/app_theme.dart';
 import '../../../theme/theme.dart';
-import '../../../widgets/widgets.dart';
 
-class BuildAttendingListView extends StatelessWidget {
-  const BuildAttendingListView({super.key});
+class BuildFavoriteListView extends StatelessWidget {
+  const BuildFavoriteListView({super.key});
 
 
 
@@ -18,32 +15,23 @@ class BuildAttendingListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final purchaseHistory = context.read<PurchaseHistoryProvider>();
+    final purchaseHistory = context.read<MovieProvider>();
 
     return ListView.builder(
       physics: const BouncingScrollPhysics(decelerationRate: ScrollDecelerationRate.fast),
       itemCount: 10,
       itemBuilder: ((context, index) {
         if (purchaseHistory.ticketsList.isEmpty) {
-          return const SizedBox();
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+
         }
         final ticket = purchaseHistory.ticketsList[index];
 
         final date = "${ticket.releaseDate.year.toString().padLeft(4, '0')}-${ticket.releaseDate.month.toString().padLeft(2, '0')}-${ticket.releaseDate.day.toString().padLeft(2, '0')}";
 
-        return Stack(
-          children: [
-            ElevatedButton(
-              style: CustomButtonStyle(
-                borderRadius: BorderRadius.circular(0),
-                backgroundColor: AppTheme.backgroundTrafficBlack,
-                overlayColor: AppTheme.dullGold.withOpacity(0.5),
-                borderColor: Colors.transparent
-              ),
-              onPressed: () {
-                HapticFeedback.selectionClick();
-              },
-              child: Container(
+        return Container(
                 margin: const EdgeInsets.only(top: 10),
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 height: 150,
@@ -111,25 +99,10 @@ class BuildAttendingListView extends StatelessWidget {
                       ),
                   ],
                 ),
-              ),
-            ),
-            Positioned(
-              right: 5,
-              top: 5,
-              child: InkWell(
-                onTap: () {
-                  HapticFeedback.selectionClick();
-                },
-                child: const Icon(
-                  Icons.star_outline,
-                  size: 35,
-                  color: AppTheme.dullGold,
-                ),
-              ),
-            )
-          ],
-        );
+              );
       }),
     );
   }
 }
+
+

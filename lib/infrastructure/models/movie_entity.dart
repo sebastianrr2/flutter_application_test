@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class TicketPurchaseHistory {
+class MovieEntity {
     final bool adult;
     final String backdropPath;
     final List<int> genreIds;
@@ -16,7 +16,7 @@ class TicketPurchaseHistory {
     final double voteAverage;
     final int voteCount;
 
-    TicketPurchaseHistory({
+    MovieEntity({
         required this.adult,
         required this.backdropPath,
         required this.genreIds,
@@ -33,11 +33,11 @@ class TicketPurchaseHistory {
         required this.voteCount,
     });
 
-    factory TicketPurchaseHistory.fromRawJson(String str) => TicketPurchaseHistory.fromJson(json.decode(str));
+    factory MovieEntity.fromRawJson(String str) => MovieEntity.fromJson(json.decode(str));
 
     String toRawJson() => json.encode(toJson());
 
-    factory TicketPurchaseHistory.fromJson(Map<String, dynamic> json) => TicketPurchaseHistory(
+    factory MovieEntity.fromJson(Map<String, dynamic> json) => MovieEntity(
         adult: json["adult"] ?? false,
         backdropPath: json["backdrop_path"] ?? '',
         genreIds: List<int>.from(json["genre_ids"].map((x) => x)),

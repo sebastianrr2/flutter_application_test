@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_application_test/presentation/screens/edit_profile_screen/edit_profile_screen.dart';
+import 'package:flutter_application_test/presentation/screens/personal_screen/widgets/build_genres_list_view.dart';
 import 'package:flutter_application_test/presentation/theme/theme_styles.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../theme/app_theme.dart';
 //import '../../../theme/theme.dart';
 //import 'build_attending_list_view.dart';
 
 class BuildCustomSearchBar extends StatefulWidget {
+
+  
   const BuildCustomSearchBar({super.key});
+  static const String routerName = 'personalprofile';
 
   @override
   State<BuildCustomSearchBar> createState() => _BuildCustomSearchBarState();
@@ -15,6 +22,7 @@ class BuildCustomSearchBar extends StatefulWidget {
 class _BuildCustomSearchBarState extends State<BuildCustomSearchBar> with SingleTickerProviderStateMixin {
 
   late TabController _tabController;
+
 
   @override
   void initState() {
@@ -35,6 +43,7 @@ class _BuildCustomSearchBarState extends State<BuildCustomSearchBar> with Single
     final focusNode = FocusNode();
     const themeStyleTextFormField = ThemeStyles.primaryTextFormFieldJosefin;
 
+
     final outlineInputBorder = UnderlineInputBorder(
       borderSide: const BorderSide( color: Colors.transparent),
       borderRadius: BorderRadius.circular(30) 
@@ -44,24 +53,28 @@ class _BuildCustomSearchBarState extends State<BuildCustomSearchBar> with Single
         enabledBorder: outlineInputBorder,
         focusedBorder: outlineInputBorder,
         fillColor: AppTheme.jet,
+        
         filled: true,
         suffixIcon: Row(
           mainAxisSize: MainAxisSize.min,
           children: [ 
             IconButton(
-              onPressed: (){ }, 
+              onPressed: (){
+                HapticFeedback.selectionClick();
+                context.pushNamed(EditProfileScreen.routerName);
+               }, 
               icon: const Icon( Icons.star, color: AppTheme.dullGold)),
-              IconButton(
-                onPressed: (){ },
-                icon: const Icon(Icons.arrow_drop_down, color: AppTheme.dullGold,) )// Add closing parenthesis here
+            //Genres DropDownList
+            const Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: BuildGenresListView() 
+            )// Add closing parenthesis here
         ],),
         prefixIcon: const Icon(
           Icons.search,
           color: AppTheme.dullGold
         )
       );
-
-
     return Column(
       children: [
         TextFormField(

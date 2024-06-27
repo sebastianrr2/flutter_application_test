@@ -1,15 +1,15 @@
 import 'dart:convert';
 
-import 'package:flutter_application_test/infrastructure/models/ticket_purchase_history.dart';
+import 'package:flutter_application_test/infrastructure/models/movie_entity.dart';
 
-class PurchaseHistoryResponse {
+class MovieResponse {
     final Dates? dates;
     final int page;
-    final List<TicketPurchaseHistory> results;
+    final List<MovieEntity> results;
     final int totalPages;
     final int totalResults;
 
-    PurchaseHistoryResponse({
+    MovieResponse({
         required this.dates,
         required this.page,
         required this.results,
@@ -17,14 +17,14 @@ class PurchaseHistoryResponse {
         required this.totalResults,
     });
 
-    factory PurchaseHistoryResponse.fromRawJson(String str) => PurchaseHistoryResponse.fromJson(json.decode(str));
+    factory MovieResponse.fromRawJson(String str) => MovieResponse.fromJson(json.decode(str));
 
     String toRawJson() => json.encode(toJson());
 
-    factory PurchaseHistoryResponse.fromJson(Map<String, dynamic> json) => PurchaseHistoryResponse(
+    factory MovieResponse.fromJson(Map<String, dynamic> json) => MovieResponse(
         dates: json["dates"] != null ? Dates.fromJson(json["dates"]) : null,
         page: json["page"],
-        results: List<TicketPurchaseHistory>.from(json["results"].map((x) => TicketPurchaseHistory.fromJson(x))),
+        results: List<MovieEntity>.from(json["results"].map((x) => MovieEntity.fromJson(x))),
         totalPages: json["total_pages"],
         totalResults: json["total_results"],
     );
