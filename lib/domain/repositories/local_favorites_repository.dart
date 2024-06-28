@@ -8,6 +8,6 @@ abstract class FavoritesRepository {
 
   Future<bool> isMovieFavorite(int movieId);
 
-  Future<List<Movie>> loadMovies();
+  Future<Movie> getMovie(int movieId);
 
 }

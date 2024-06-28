@@ -12,6 +12,7 @@ import 'package:flutter_application_test/presentation/config/app_router.dart';
 import 'package:flutter_application_test/presentation/providers/providers.dart';
 import 'package:flutter_application_test/presentation/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -22,8 +23,6 @@ void main() async {
   /* Sólo tiene que llamar a este método si necesita que la vinculación se inicialice antes de llamar a 
   runApp*/
 
-
-  
   WidgetsFlutterBinding.ensureInitialized();
   // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
@@ -36,6 +35,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +55,6 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown
     ]);
 
-
-
-
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(
@@ -70,11 +67,13 @@ class MyApp extends StatelessWidget {
            ),
            //se agrego el provider de generos
           ChangeNotifierProvider(
-
-
             lazy: true,
             create: (context) => GenresProvider(genresRepository: genresRepository)..loadGenreList()
-          )
+          ),
+          ChangeNotifierProvider(
+            lazy: true,
+            create: (context) => FilterMovieByGenreProvider(purchaseHistoryRepository)
+          ),
         ],
         child: MaterialApp.router(
     

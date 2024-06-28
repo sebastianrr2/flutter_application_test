@@ -43,7 +43,6 @@ class PersonalScreen extends StatelessWidget {
       body: const Column(
         children: [
           BuildCustomSearchBar(),
-          
           //Expanded(child: BuildCustomTabBar())
           Expanded(child: BuildMovieListView(),)
         ],
@@ -51,3 +50,4 @@ class PersonalScreen extends StatelessWidget {
     );
   }
 }
+

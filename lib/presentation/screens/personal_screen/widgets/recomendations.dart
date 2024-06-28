@@ -18,7 +18,7 @@ class Recommendations extends StatelessWidget {
   Widget build(BuildContext context) {
     // Determine which widget to display based on the conditions
     Widget adultWidget;
-    if (adult == false) {
+    if (adult == true) {
       adultWidget = Container(
         height: 20,
         width: 60,
@@ -39,7 +39,7 @@ class Recommendations extends StatelessWidget {
     }
 
     Widget popularityWidget;
-    if (popularity > 4000) {
+    if (popularity > 2000) {
       popularityWidget = Container(
         height: 20,
         width: 60,

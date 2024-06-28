@@ -9,9 +9,11 @@ import 'package:flutter_application_test/infrastructure/models/genres_model.dart
 
 
 part 'my_list_provider.dart';
-part 'purchase_movie.dart';
+part 'movie_provider.dart';
 part 'form_provider.dart';
 
 //agregar provider para generos
 part 'genres_provider.dart';
+
+part 'filter_by_genres_provider.dart';
 

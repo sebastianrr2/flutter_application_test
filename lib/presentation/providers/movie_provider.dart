@@ -8,7 +8,7 @@ class MovieProvider extends ChangeNotifier {
 
   MovieProvider({required this.purchaseHistoryRepository});
 
-  Future<void> loadTicketsPurchaseHistory() async {
+  Future<void> loadTicketsPurchaseHistory({bool reset = false}) async {
     currentPage++;
 
     final List<Movie> newListTickets = await purchaseHistoryRepository.getMovies(page: currentPage);
@@ -18,4 +18,9 @@ class MovieProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<Movie> getMovieList(){
+    return ticketsList;
+  }
+
 }
+

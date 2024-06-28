@@ -11,14 +11,14 @@ class FavoritesRepositoryImpl extends FavoritesRepository {
   }
 
   @override
-  Future<List<Movie>> loadMovies() {
-    // TODO: implement loadMovies
-    throw UnimplementedError();
-  }
-
-  @override
   Future<void> toggleFavorite(Movie purchaseHistory) {
     // TODO: implement toggleFavorite
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<Movie> getMovie(int movieId) {
+    // TODO: implement getMovie
     throw UnimplementedError();
   }
 

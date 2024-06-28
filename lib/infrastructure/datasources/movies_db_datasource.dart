@@ -34,6 +34,23 @@ class MoviesDbDatasource extends MoviesDatasource {
 
     return purcharseHistory;
   }
+  
+  @override
+  Future<List<Movie>> getMoviesFilterByGenre(int genreId) async {
+
+    final response = await dio.get('/movie/now_playing');
+
+    final movieFilteredResponse = MovieResponse.fromJson(response.data);
+
+    ///El where permite filtrar la lista. Si se cumple la condicion se genera la lista.
+    final List<Movie> movieFiltered = movieFilteredResponse.results
+    .where((movieFilter) => movieFilter.genreIds.contains(genreId))
+    .map(
+      (movieFilter) => MovieMapper.movieDBToEntity(movieFilter)
+    ).toList();
+
+    return movieFiltered;
+  }
 
 
 }
