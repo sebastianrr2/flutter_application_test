@@ -1,51 +1,54 @@
-
-
-import 'package:dio/dio.dart';
 import 'package:flutter_application_test/domain/datasources/local_favorites_datasource.dart';
 import 'package:flutter_application_test/domain/entities/movie.dart';
 import 'package:flutter_application_test/shared/data/favorites_list.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class LocalFavoritesDatasourceImpl extends FavoritesDatasource{
-
-
-  final dio = Dio(BaseOptions(
-    baseUrl: 'https://api.themoviedb.org/3',
-    queryParameters: {
-      'api_key': dotenv.env['THE_MOVIEDB_KEY'] ?? '',
-      'language': 'en-US'
-    }
-  )
-  );
+class LocalFavoritesDatasourceImpl extends FavoritesDatasource {
   List<Movie> favoritesList = favorites;
 
   @override
-  Future<bool> isMovieFavorite(int movieId) {
-    // Verifica si la lista de favoritos no está vacía
-    if (favoritesList.isNotEmpty) {
-      // Busca si alguna película en la lista de favoritos tiene el ID proporcionado
-      bool isFavorite = favoritesList.any((movie) => movie.id == movieId);
-      return Future.value(isFavorite);
+  bool isMovieFavorite(int movieId) {
+    return favoritesList.any((movie) => movie.id == movieId);
+  }
+
+  @override
+  Future<void> toggleFavorite(Movie movie) async {
+
+
+    bool isFavorite = isMovieFavorite(movie.id);
+
+    if (isFavorite) {
+      favoritesList.removeWhere((movie) => movie.id == movie.id);
     } else {
-      return Future.value(false); // Si la lista está vacía, retorna `false`
+      //Movie? movie = await getMovie(movieId);
+      //if (movie != null) {
+        favoritesList.add(movie);
+      //}
     }
   }
 
+  @override
+  Future<Movie?> getMovie(int movieId) async {
+    // Simulando una búsqueda de detalles de película por su ID
+    try {
+      return favoritesList.firstWhere((movie) => movie.id == movieId);
+    } catch (e) {
+      return null;
+    }
+  }
 
   @override
-  Future<void> toggleFavorite(int movieId) {
-    // TODO: implement toggleFavorite
-    throw UnimplementedError();
+  Future<void> addMovieToList(Movie movie) async {
+    if (!isMovieFavorite(movie.id)) {
+      favoritesList.add(movie);
+    }
   }
   
   @override
-  Future<Movie> getMovie(int movieId) {
-    // TODO: implement toggleFavorite
-    throw UnimplementedError();
-    
-
-
+  List<Movie> getFavorites() {
+    return favorites;
   }
-
-  
 }
+
+
+
+

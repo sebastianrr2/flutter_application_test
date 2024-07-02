@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_test/presentation/screens/edit_profile_screen/edit_profile_screen.dart';
+import 'package:flutter_application_test/presentation/screens/edit_profile_screen/favorites_screen.dart';
 import 'package:flutter_application_test/presentation/screens/personal_screen/widgets/build_genres_list_view.dart';
 import 'package:flutter_application_test/presentation/theme/theme_styles.dart';
 import 'package:go_router/go_router.dart';
@@ -61,7 +61,7 @@ class _BuildCustomSearchBarState extends State<BuildCustomSearchBar> with Single
             IconButton(
               onPressed: (){
                 HapticFeedback.selectionClick();
-                context.pushNamed(EditProfileScreen.routerName);
+                context.pushNamed(FavoritesScreen.routerName);
                }, 
               icon: const Icon( Icons.star, color: AppTheme.dullGold)),
             //Genres DropDownList

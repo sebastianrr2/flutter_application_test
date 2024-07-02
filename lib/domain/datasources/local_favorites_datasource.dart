@@ -3,11 +3,16 @@ import 'package:flutter_application_test/domain/entities/movie.dart';
 
 abstract class FavoritesDatasource {
 
-  Future<void> toggleFavorite(int movieId);
+  Future<void> toggleFavorite(Movie movie);
 
-  Future<bool> isMovieFavorite(int movieId);
+  bool isMovieFavorite(int movieId);
 
-  Future<Movie> getMovie(int movieId);
+  Future<Movie?> getMovie(int movieId);
+
+  Future<void> addMovieToList( Movie movie);
+
+  List<Movie> getFavorites();
+
 
 
 }

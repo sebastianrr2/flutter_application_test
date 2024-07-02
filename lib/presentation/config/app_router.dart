@@ -13,8 +13,8 @@ final router = GoRouter(
       routes: [
         GoRoute(
           path: 'edit_profile',
-          name: EditProfileScreen.routerName,
-          builder: (context, state) => const EditProfileScreen()
+          name: FavoritesScreen.routerName,
+          builder: (context, state) => const FavoritesScreen()
         ),
       ]
     ),

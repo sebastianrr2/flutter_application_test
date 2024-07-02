@@ -1,13 +1,17 @@
 
 import 'package:flutter/services.dart';
+import 'package:flutter_application_test/domain/datasources/local_favorites_datasource.dart';
 import 'package:flutter_application_test/infrastructure/datasources/genre_db_datasource.dart';
+import 'package:flutter_application_test/infrastructure/datasources/local_favorites_datasource_impl.dart';
 import 'package:flutter_application_test/infrastructure/datasources/local_mylist_datasource_impl.dart';
 import 'package:flutter_application_test/infrastructure/datasources/movies_db_datasource.dart';
 import 'package:flutter_application_test/infrastructure/repositories/genre_repository_impl.dart';
+import 'package:flutter_application_test/infrastructure/repositories/local_favorites_respository_impl.dart';
 import 'package:flutter_application_test/infrastructure/repositories/mylist_post_repository_impl.dart';
 import 'package:flutter_application_test/infrastructure/repositories/movie_repository_impl.dart';
 
 import 'package:flutter_application_test/presentation/config/app_router.dart';
+import 'package:flutter_application_test/presentation/providers/local_favorites_provider.dart';
 
 import 'package:flutter_application_test/presentation/providers/providers.dart';
 import 'package:flutter_application_test/presentation/theme/app_theme.dart';
@@ -43,6 +47,7 @@ class MyApp extends StatelessWidget {
     final myListPostRepository = MyListRepositoryImpl(myListDatasource: LocalMyListDatasourceImpl());
     final purchaseHistoryRepository = MovieRepositoryImpl(MoviesDbDatasource());
     final genresRepository = GenreRepositoryImpl(GenreDbDatasource());
+    final favoritesRepository = FavoritesRepositoryImpl(datasource: LocalFavoritesDatasourceImpl());
     //import
 
 
@@ -74,6 +79,10 @@ class MyApp extends StatelessWidget {
             lazy: true,
             create: (context) => FilterMovieByGenreProvider(purchaseHistoryRepository)
           ),
+          ChangeNotifierProvider(
+            lazy: true,
+            create: (context) => FavoritesProvider(favoritesRepository:favoritesRepository)
+          )
         ],
         child: MaterialApp.router(
     

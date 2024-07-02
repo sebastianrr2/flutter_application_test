@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_test/domain/entities/movie.dart';
+import 'package:flutter_application_test/presentation/providers/local_favorites_provider.dart';
 import 'package:flutter_application_test/presentation/screens/personal_screen/widgets/recomendations.dart';
 import 'package:flutter_application_test/presentation/theme/app_theme.dart';
 import 'package:provider/provider.dart';
@@ -12,15 +13,16 @@ class BuildMovieListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<MovieProvider, FilterMovieByGenreProvider>(
-      builder: (context, movieProvider, filterMovieGenreProvider, child) {
+    return Consumer3<MovieProvider, FilterMovieByGenreProvider, FavoritesProvider>(
+      builder: (context, movieProvider, filterMovieGenreProvider, favoritesProvider, child) {
         final List<Movie> moviesToShow = filterMovieGenreProvider.isFiltered
-            ? filterMovieGenreProvider.filteredMoviesList : movieProvider.ticketsList;
+            ? filterMovieGenreProvider.filteredMoviesList
+            : movieProvider.ticketsList;
 
         if (moviesToShow.isEmpty) {
           return const Center(
             child: Text(
-              'Not found',
+              'LOADING',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           );
@@ -32,7 +34,10 @@ class BuildMovieListView extends StatelessWidget {
           itemBuilder: (context, index) {
             Movie movieInfo = moviesToShow[index];
 
-            final date = "${movieInfo.releaseDate.year.toString().padLeft(4, '0')}-${movieInfo.releaseDate.month.toString().padLeft(2, '0')}-${movieInfo.releaseDate.day.toString().padLeft(2, '0')}";
+            final date =
+                "${movieInfo.releaseDate.year.toString().padLeft(4, '0')}-${movieInfo.releaseDate.month.toString().padLeft(2, '0')}-${movieInfo.releaseDate.day.toString().padLeft(2, '0')}";
+
+            bool isFavorite = favoritesProvider.isFavorite(movieInfo.id);
 
             return Stack(
               children: [
@@ -106,8 +111,17 @@ class BuildMovieListView extends StatelessWidget {
                   right: 5,
                   top: 5,
                   child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.star_border, color: AppTheme.dullGold),
+                    onPressed: () {
+                      if (isFavorite) {
+                        favoritesProvider.removeFavorite(movieInfo);
+                      } else {
+                        favoritesProvider.addFavorite(movieInfo);
+                      }
+                    },
+                    icon: Icon(
+                      isFavorite ? Icons.star : Icons.star_border,
+                      color: isFavorite ? AppTheme.dullGold : AppTheme.dullGold,
+                    ),
                   ),
                 ),
               ],
@@ -118,4 +132,3 @@ class BuildMovieListView extends StatelessWidget {
     );
   }
 }
-
