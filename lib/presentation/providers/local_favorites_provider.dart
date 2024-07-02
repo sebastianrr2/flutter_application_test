@@ -17,10 +17,10 @@ class FavoritesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /*Future<void> removeFavorite(int movieId) async {
-    await favoritesRepository.toggleFavorite(movieId);
+  Future<void> removeFavorite(Movie movie) async {
+    await favoritesRepository.toggleFavorite(movie);
     notifyListeners();
-  }*/
+  }
 
   bool isFavorite(int movieId) {
     return favoritesRepository.isMovieFavorite(movieId);
