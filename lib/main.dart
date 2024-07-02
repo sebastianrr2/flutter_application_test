@@ -1,6 +1,5 @@
 
 import 'package:flutter/services.dart';
-import 'package:flutter_application_test/domain/datasources/local_favorites_datasource.dart';
 import 'package:flutter_application_test/infrastructure/datasources/genre_db_datasource.dart';
 import 'package:flutter_application_test/infrastructure/datasources/local_favorites_datasource_impl.dart';
 import 'package:flutter_application_test/infrastructure/datasources/local_mylist_datasource_impl.dart';

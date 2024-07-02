@@ -17,7 +17,7 @@ class LocalFavoritesDatasourceImpl extends FavoritesDatasource {
     bool isFavorite = isMovieFavorite(movie.id);
 
     if (isFavorite) {
-      favoritesList.removeWhere((movie) => movie.id == movie.id);
+      favoritesList.removeWhere((m) => m.id == movie.id);
     } else {
       //Movie? movie = await getMovie(movieId);
       //if (movie != null) {
