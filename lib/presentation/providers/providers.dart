@@ -6,6 +6,7 @@ import 'package:flutter_application_test/domain/repositories/genres_repository.d
 import 'package:flutter_application_test/domain/repositories/my_list_post_repository.dart';
 import 'package:flutter_application_test/domain/repositories/movies_repository.dart';
 import 'package:flutter_application_test/infrastructure/models/genres_model.dart';
+import 'package:provider/provider.dart';
 
 
 part 'my_list_provider.dart';

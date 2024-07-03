@@ -65,19 +65,22 @@ class MyApp extends StatelessWidget {
             lazy: false,
             create: (context) => MyListProvider(myListRepository: myListPostRepository)..loadMyList()
           ),
+          //Provider para desplegar la lista completa de peliculas traida de la API
           ChangeNotifierProvider(
             lazy: false,
             create: (context) => MovieProvider(purchaseHistoryRepository: purchaseHistoryRepository)..loadTicketsPurchaseHistory()
            ),
-           //se agrego el provider de generos
+           //Provider para desplegar la lista de generos traidos de la API
           ChangeNotifierProvider(
             lazy: true,
             create: (context) => GenresProvider(genresRepository: genresRepository)..loadGenreList()
           ),
+          //Provider para filtrar la lista de peliculas por generos
           ChangeNotifierProvider(
             lazy: true,
             create: (context) => FilterMovieByGenreProvider(purchaseHistoryRepository)
           ),
+          //Provider para la traer, marcar y desmarcar favoritos
           ChangeNotifierProvider(
             lazy: true,
             create: (context) => FavoritesProvider(favoritesRepository:favoritesRepository)

@@ -15,6 +15,14 @@ class BuildMovieListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer3<MovieProvider, FilterMovieByGenreProvider, FavoritesProvider>(
       builder: (context, movieProvider, filterMovieGenreProvider, favoritesProvider, child) {
+        if (movieProvider.loadingStatus) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: AppTheme.dullGold,
+            )
+          );
+        }
+
         final List<Movie> moviesToShow = filterMovieGenreProvider.isFiltered
             ? filterMovieGenreProvider.filteredMoviesList
             : movieProvider.ticketsList;
@@ -22,7 +30,7 @@ class BuildMovieListView extends StatelessWidget {
         if (moviesToShow.isEmpty) {
           return const Center(
             child: Text(
-              'LOADING',
+              'No movies found',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           );

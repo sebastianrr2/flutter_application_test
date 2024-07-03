@@ -13,6 +13,9 @@ class LocalFavoritesDatasourceImpl extends FavoritesDatasource {
   @override
   Future<void> toggleFavorite(Movie movie) async {
 
+    /*Esta funcion es modificable para que con el id se puede hacer el toggle, 
+    el codigo comentado es para llamar la funcion de busqueda 
+    en la db*/
 
     bool isFavorite = isMovieFavorite(movie.id);
 
@@ -29,6 +32,7 @@ class LocalFavoritesDatasourceImpl extends FavoritesDatasource {
   @override
   Future<Movie?> getMovie(int movieId) async {
     // Simulando una búsqueda de detalles de película por su ID
+    //En caso de que alla una db local se puede implementar esta funcion para que busque la pelicula por ID
     try {
       return favoritesList.firstWhere((movie) => movie.id == movieId);
     } catch (e) {

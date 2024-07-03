@@ -5,8 +5,6 @@ import 'package:flutter_application_test/domain/repositories/local_favorites_rep
 class FavoritesProvider extends ChangeNotifier {
   final FavoritesRepository favoritesRepository;
 
-
-
   FavoritesProvider({required this.favoritesRepository});
 
   List<Movie> get favoriteMovies => favoritesRepository.getFavorites();

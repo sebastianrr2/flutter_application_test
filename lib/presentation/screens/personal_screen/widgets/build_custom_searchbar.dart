@@ -23,7 +23,6 @@ class _BuildCustomSearchBarState extends State<BuildCustomSearchBar> with Single
 
   late TabController _tabController;
 
-
   @override
   void initState() {
     super.initState();
@@ -57,9 +56,11 @@ class _BuildCustomSearchBarState extends State<BuildCustomSearchBar> with Single
         filled: true,
         suffixIcon: Row(
           mainAxisSize: MainAxisSize.min,
-          children: [ 
+          children: [
+            //Icono de la estrella para ir a la pantalla de favoritos 
             IconButton(
               onPressed: (){
+                //Ruta para ir a la pantalla de favoritos
                 HapticFeedback.selectionClick();
                 context.pushNamed(FavoritesScreen.routerName);
                }, 

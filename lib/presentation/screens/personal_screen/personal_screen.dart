@@ -38,12 +38,12 @@ class PersonalScreen extends StatelessWidget {
         ],
       ),
 
-      //MODIFICACION PARA CAMBIAR LA VISTA DEL USUARIO Y LOS BOTONES,
-      //DE ESTA FORMA SOLO SE DESPLIEGA LA LISTVIEW CORRESPONDIENTE A LAS PELICULAS
+      //Despliegue de la barra de busqueda, 
       body: const Column(
         children: [
+          //Barra de busqueda
           BuildCustomSearchBar(),
-          //Expanded(child: BuildCustomTabBar())
+          //Lista de pelicuals
           Expanded(child: BuildMovieListView(),)
         ],
       )
