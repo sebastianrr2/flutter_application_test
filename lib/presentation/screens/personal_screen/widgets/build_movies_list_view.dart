@@ -13,8 +13,10 @@ class BuildMovieListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Usa el Consumer3 para escuchar tres proveedores: MovieProvider, FilterMovieByGenreProvider y FavoritesProvider
     return Consumer3<MovieProvider, FilterMovieByGenreProvider, FavoritesProvider>(
       builder: (context, movieProvider, filterMovieGenreProvider, favoritesProvider, child) {
+        // Si el MovieProvider está en estado de carga, muestra un indicador de progreso
         if (movieProvider.loadingStatus) {
           return const Center(
             child: CircularProgressIndicator(
@@ -22,11 +24,12 @@ class BuildMovieListView extends StatelessWidget {
             )
           );
         }
-
+        // Decide qué lista de películas mostrar según si hay un filtro activo
         final List<Movie> moviesToShow = filterMovieGenreProvider.isFiltered
             ? filterMovieGenreProvider.filteredMoviesList
             : movieProvider.ticketsList;
 
+        // Si no hay películas para mostrar, muestra un mensaje de que no se encontraron películas
         if (moviesToShow.isEmpty) {
           return const Center(
             child: Text(
@@ -35,7 +38,7 @@ class BuildMovieListView extends StatelessWidget {
             ),
           );
         }
-
+        // Construye una lista de películas usando ListView.builder
         return ListView.builder(
           physics: const BouncingScrollPhysics(decelerationRate: ScrollDecelerationRate.fast),
           itemCount: moviesToShow.length,
@@ -44,7 +47,7 @@ class BuildMovieListView extends StatelessWidget {
 
             final date =
                 "${movieInfo.releaseDate.year.toString().padLeft(4, '0')}-${movieInfo.releaseDate.month.toString().padLeft(2, '0')}-${movieInfo.releaseDate.day.toString().padLeft(2, '0')}";
-
+            // Determina si la película es favorita
             bool isFavorite = favoritesProvider.isFavorite(movieInfo.id);
 
             return Stack(
@@ -107,6 +110,7 @@ class BuildMovieListView extends StatelessWidget {
                                 style: ThemeStylesSettings.primaryText,
                               ),
                               const SizedBox(height: 5),
+                              // Widget de recomendaciones
                               Recommendations(adult: movieInfo.adult, popularity: movieInfo.popularity)
                             ],
                           ),
@@ -115,6 +119,7 @@ class BuildMovieListView extends StatelessWidget {
                     ],
                   ),
                 ),
+                // Botón para marcar/desmarcar como favorito
                 Positioned(
                   right: 5,
                   top: 5,

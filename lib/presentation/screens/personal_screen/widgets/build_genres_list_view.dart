@@ -42,8 +42,10 @@ class BuildGenresListView extends StatelessWidget {
       offset: const Offset(0, 50),
       onSelected: (value) async {
         if (value == -1) {
+          //en caso de que se presione el boton de all, se llama limpiar filtro del provider, y desplegar la lista completa de peliculas
           await context.read<FilterMovieByGenreProvider>().clearFilter(context);
         } else {
+          //Notifica el provider encargado de los filtros por genero
           await context.read<FilterMovieByGenreProvider>().filterMoviesByGenres(value);
         }
       }

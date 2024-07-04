@@ -2,11 +2,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_application_test/infrastructure/datasources/genre_db_datasource.dart';
 import 'package:flutter_application_test/infrastructure/datasources/local_favorites_datasource_impl.dart';
-import 'package:flutter_application_test/infrastructure/datasources/local_mylist_datasource_impl.dart';
 import 'package:flutter_application_test/infrastructure/datasources/movies_db_datasource.dart';
 import 'package:flutter_application_test/infrastructure/repositories/genre_repository_impl.dart';
 import 'package:flutter_application_test/infrastructure/repositories/local_favorites_respository_impl.dart';
-import 'package:flutter_application_test/infrastructure/repositories/mylist_post_repository_impl.dart';
 import 'package:flutter_application_test/infrastructure/repositories/movie_repository_impl.dart';
 
 import 'package:flutter_application_test/presentation/config/app_router.dart';
@@ -43,7 +41,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final myListPostRepository = MyListRepositoryImpl(myListDatasource: LocalMyListDatasourceImpl());
     final purchaseHistoryRepository = MovieRepositoryImpl(MoviesDbDatasource());
     final genresRepository = GenreRepositoryImpl(GenreDbDatasource());
     final favoritesRepository = FavoritesRepositoryImpl(datasource: LocalFavoritesDatasourceImpl());
@@ -61,10 +58,6 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(
-            lazy: false,
-            create: (context) => MyListProvider(myListRepository: myListPostRepository)..loadMyList()
-          ),
           //Provider para desplegar la lista completa de peliculas traida de la API
           ChangeNotifierProvider(
             lazy: false,

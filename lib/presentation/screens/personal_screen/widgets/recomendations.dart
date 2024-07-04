@@ -2,23 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_test/presentation/theme/app_theme.dart';
 import 'package:flutter_application_test/presentation/theme/theme.dart';
 
-
-
-//MODIFICACION DE NUEVO WIDGET PARA RECOMENDACIONES AL USUARIO
-
+// Un widget sin estado para mostrar recomendaciones al usuario basado en las propiedades de la película
 class Recommendations extends StatelessWidget {
 
-
+  // Propiedades finales que indican si la película es para adultos y su popularidad
   final bool adult;
   final double popularity;
 
+  // Constructor del widget que recibe las propiedades `adult` y `popularity`
   const Recommendations({super.key, required this.adult, required this.popularity});
 
   @override
   Widget build(BuildContext context) {
-    // Determine which widget to display based on the conditions
+    // Widget para indicar si la película es para adultos
     Widget adultWidget;
-    if (adult == true) {
+    if (adult == false) {
       adultWidget = Container(
         height: 20,
         width: 60,
@@ -28,16 +26,16 @@ class Recommendations extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            '18+',
+            '-18',
             style: ThemeStylesSettings.secondaryText,
           ),
         ),
       );
-    }
-    else {
+    } else {
       adultWidget = Container();
     }
 
+    // Widget para indicar si la película es popular
     Widget popularityWidget;
     if (popularity > 2000) {
       popularityWidget = Container(
@@ -54,16 +52,17 @@ class Recommendations extends StatelessWidget {
           ),
         ),
       );
-    }
-    else {
+    } else {
       popularityWidget = Container();
     }
-    // Return the Row widget with the determined content
+
+    // Devuelve un widget `Row` que contiene los widgets determinados anteriormente
     return Row(
       children: [
         adultWidget,
         const SizedBox(width: 5),
-        popularityWidget],
+        popularityWidget,
+      ],
     );
   }
 }
